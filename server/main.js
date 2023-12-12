@@ -32,7 +32,7 @@ app.get("/",(req,res)=>{
 app.post("/add",(req,res)=>{
     var user=req.body.user
     var pass=req.body.pass
-    const sql=`INSERT INTO login("user",password) values ('${user}','${pass}')`
+    const sql=`INSERT INTO "UserMaster"(uname,password) values ('${user}','${pass}')`
     cli.query(sql,(err,resi)=>{
         if(err) throw err
         console.log(resi)
@@ -45,7 +45,7 @@ app.post("/add",(req,res)=>{
 app.post("/login",(req,res)=>{
     var user=req.body.user
     var pass=req.body.pass
-    const sql=`select * from login where "user"='${user}' and password='${pass}'`
+    const sql=`select * from "UserMaster" where uname='${user}' and password='${pass}'`
     cli.query(sql,(err,ress)=>{
         if(err) throw err
         var dta=ress.rows
@@ -58,6 +58,6 @@ app.post("/login",(req,res)=>{
     })
 })
 
-app.listen(8080,()=>{
+app.listen(8000,()=>{
     console.log("Server Started")
 })
